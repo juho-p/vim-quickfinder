@@ -1,5 +1,8 @@
 fu! s:files(pattern)
     let pat = a:pattern
+    if pat == ''
+        return []
+    end
     let command = "git ls-files -o --exclude-standard -c '*/" . pat . "' '" . pat . "'"
     return systemlist(command)
 endf
@@ -33,7 +36,6 @@ endf
 
 function! ListGitFiles(ArgLead, CmdLine, CursorPos)
     let filelist = s:files(a:ArgLead . '*')
-    let g:foo = filelist
     return filelist
 endf
 
